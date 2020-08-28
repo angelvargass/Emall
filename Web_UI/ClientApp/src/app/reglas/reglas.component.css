@@ -1,0 +1,7 @@
+.list-group-item {
+    border: 0;
+}
+
+input[type=text] {
+    width: 100%;
+}

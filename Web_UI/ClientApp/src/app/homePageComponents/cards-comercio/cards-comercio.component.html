@@ -1,0 +1,26 @@
+<section class="main-section">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="section-title">
+        <h2>Nuestros Comercios</h2>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-4 col-md-6 col-sm-6" *ngFor="let comercio of comercios">
+      <div class="product__item">
+        <div class="product__item__pic set-bg img-container" data-setbg="item.id_foto">
+          <img [src]="comercio.archivos[0].enlace" alt="Logo de comercio" class="img mx-auto d-block">
+          <ul class="product__item__pic__hover">
+            <li><a [routerLink]="['/perfil-comercio']" [queryParams]="{comercio: comercio.id}"><i
+                  class="fas fa-arrow-right"></i></a></li>
+          </ul>
+        </div>
+        <div class="product__item__text">
+          <h6>{{comercio.nombre}}</h6>
+          <h5>{{comercio.categorias[0]}}</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

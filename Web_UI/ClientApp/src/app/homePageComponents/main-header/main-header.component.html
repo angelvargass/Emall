@@ -1,0 +1,55 @@
+<!-- Header Section Begin -->
+<header class="header">
+  <div class="header__top">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 col-md-6">
+          <div class="header__top__left">
+            <ul>
+              <li *ngIf="usuarioLogueado != null">
+                <i class="fa fa-envelope"></i> {{ usuarioLogueado.usuario.Correo }}
+              </li>
+              <li>#QuédateEnCasa</li>
+            </ul>
+          </div>
+        </div>
+
+        <!--Acá está el inicio de sesión-->
+        <div class="col-lg-6 col-md-6">
+          <div class="header__top__right">
+            <div class="header__top__right__language">
+              <i class="fa fa-user"></i> &nbsp;
+              <div *ngIf="usuarioLogueado == null">Iniciar Sesión</div>
+              <div *ngIf="usuarioLogueado != null">{{ usuarioLogueado.usuario.Nombre }} {{ usuarioLogueado.usuario.Apellido }}</div>
+              <span class="arrow_carrot-down"></span>
+              <ul>
+                <li *ngIf="usuarioLogueado == null">
+                  <a [routerLink]="['/autenticacion/login']">Iniciar sesión</a>
+                </li>
+                <li *ngIf="usuarioLogueado != null">
+                  <a [routerLink]="['/perfil-usuario']">Ver mi perfil</a>
+                </li>
+                <li *ngIf="usuarioLogueado?.usuario?.Tipo==1">
+                  <a [routerLink]="['/dashboard-admin']">Dashboard Admin</a>
+                </li>
+                <!-- <li *ngIf="usuarioLogueado?.usuario?.Tipo==3">
+                  <a [routerLink]="['/perfil-admin-comercio']">Administrar Comercios</a>
+                </li> -->
+                <li *ngIf="usuarioLogueado?.usuario?.Tipo==4">
+                  <a [routerLink]="['/dashboard-comercio']" [queryParams]="{comercio: id_comercio}">Comercio</a>
+                </li>
+                <li *ngIf="usuarioLogueado != null">
+                  <a [routerLink]="['/autenticacion']" (click)="logout()">Cerrar Sesión</a>
+                </li>
+              </ul>
+            </div>
+            <div *ngIf="usuarioLogueado == null" class="header__top__right__auth">
+              <a [routerLink]="['/autenticacion/register']">Registarse</a>
+            </div>
+            <a [routerLink]="['/carrito-compras']" class="heart-icon"><span class="icon_cart_alt"></span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

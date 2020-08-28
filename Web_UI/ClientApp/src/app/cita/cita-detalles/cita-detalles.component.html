@@ -1,0 +1,54 @@
+<app-header></app-header>
+
+<div class="container">
+  <h2>Codigo de confirmacion: {{cita.codigo}}</h2>
+  <div class="row">
+    <div class="col-lg-8">
+      <div *ngIf="items">
+        <table class="table table-striped table-sm text-center">
+          <thead>
+            <tr>
+              <th class="text-center">Item</th>
+              <th class="text-center">Nombre</th>
+              <th class="text-center">Descripción</th>
+              <th class="text-center">Precio</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of items">
+              <td><img [src]="item.id_foto" style="width: 80px; height: 80px;" /></td>
+              <td>{{ item.nombre }}</td>
+              <td>{{ item.descripcion }}</td>
+              <td> ₡{{ item.precio | number:0}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="col-4">
+      <div *ngIf="cita">
+        <qrcode [qrdata]="cita.codigo" [width]="213" [errorCorrectionLevel]="'M'"></qrcode>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="reglas.length > 0">
+    <h3>Reglas para ingreso a la sucursal:</h3><br><br>
+  </div>
+
+  <div class="row" *ngIf="reglas.length > 0">
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let regla of reglas; index as i">{{i+1}}. {{regla.Detalle}}</li>
+    </ul>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <p>&nbsp;</p>
+      <p><a [routerLink]="['/direcciones/ruta/', cita.id]" class="site-btn">Como llegar al comercio?</a></p>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

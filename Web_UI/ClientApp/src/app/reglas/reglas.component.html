@@ -1,0 +1,57 @@
+<app-main-header></app-main-header>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-10 col-md-10">
+      <h1>Reglas</h1>
+      <p>Añada y edite las reglas a aplicar para la sucursal.</p>
+      <br><br>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-10 col-md-10">
+      <ul *ngFor="let regla of reglas; index as i" class="list-group list-group-horizontal">
+        <li class="list-group-item">{{i+1}}</li>
+        <li class="list-group-item col-lg-10 col-md-10">
+          <input 
+            type="text" 
+            class="form-control" 
+            id="regla{{i+1}}" 
+            maxlength="150" 
+            [(ngModel)]="regla.Detalle"
+            (focusout)="onfocusOut(i)"
+            (keydown.arrowdown)="onKeyArrowDown($event)" 
+            (keydown.arrowup)="onKeyArrowUp($event)"
+            (keydown.enter)="crearRegla()">
+        </li>
+        <li class="list-group-item">
+          <button class="btn btn-secondary btn-sm" (click)="eliminarRegla(regla.Id)">
+            <i class="fas fa-trash-alt"></i>
+          </button>
+        </li>
+      </ul>
+
+      <ul class="list-group list-group-horizontal">
+        <li class="list-group-item">&nbsp;</li>
+        <li class="list-group-item col-lg-10 col-md-10">
+          <label><strong>Digite su nueva regla y presiona enter:</strong></label>
+          <input 
+            type="text" 
+            class="form-control" 
+            id="regla" 
+            maxlength="150" 
+            [(ngModel)]="regla.Detalle"
+            [ngClass]="{ 'is-invalid': tieneErrores }" 
+            (keydown.arrowdown)="onKeyArrowDown($event)"
+            (keydown.arrowup)="onKeyArrowUp($event)" 
+            (keydown.enter)="submit()">
+          <span [hidden]="!tieneErrores" class="invalid-feedback">Longitud minima de 5 caracteres</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <br><br><br>
+</div>
+
+<app-footer></app-footer>
